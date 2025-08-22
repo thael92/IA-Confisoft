@@ -632,32 +632,203 @@ h1 span.highlight {
     left: -1.5rem;
 }
 
-@media (max-width: 1024px) {
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
+/* Projeção AI */
+.ai-projection {
+    position: absolute;
+    right: 10%;
+    bottom: 0;
+    width: 300px;
+    height: 400px;
+    pointer-events: none;
+}
+
+.hologram-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hologram-robot {
+    position: relative;
+    font-size: 5rem;
+    color: #00ffff;
+    animation: float 4s ease-in-out infinite;
+    text-shadow: 0 0 20px #00ffff;
+    opacity: 0.8;
+}
+
+.hologram-robot::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 2s ease-out infinite;
+}
+
+.scanning-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    animation: scan 3s linear infinite;
+}
+
+.hologram-circles {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    border: 1px solid rgba(0,255,255,0.1);
+    animation: rotate 20s linear infinite;
+}
+
+.hologram-circles::before,
+.hologram-circles::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0,255,255,0.1);
+}
+
+.hologram-circles::before {
+    top: 25%;
+    right: 25%;
+    bottom: 25%;
+    left: 25%;
+    animation: rotate 15s linear reverse infinite;
+}
+
+.hologram-circles::after {
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+    animation: rotate 10s linear infinite;
+}
+
+.data-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.data-particles::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, #00ffff 1px, transparent 1px);
+    background-size: 15px 15px;
+    animation: particleFloat 20s linear infinite;
+    opacity: 0.3;
+}
+
+.projection-base {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 20px;
+    background: rgba(0,255,255,0.2);
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+.base-light {
+    position: absolute;
+    top: -380px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,255,255,0.1), transparent);
+    clip-path: polygon(20% 100%, 80% 100%, 100% 0, 0 0);
+}
+
+@keyframes scan {
+    0%,
+    100% {
+        top: 0;
     }
-    
-    .footer-brand {
-        grid-column: 1 / -1;
+
+    50% {
+        top: 100%;
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes particleFloat {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/* Media Queries para a projeção */
+@media (max-width: 1024px) {
+    .ai-projection {
+        right: 5%;
+        width: 250px;
+        height: 350px;
+    }
+
+    .hologram-robot {
+        font-size: 4rem;
     }
 }
 
 @media (max-width: 768px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
+    .ai-projection {
+        position: relative;
+        right: auto;
+        width: 200px;
+        height: 300px;
+        margin: 2rem auto;
     }
-    
-    .footer-bottom-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
+
+    .hologram-robot {
+        font-size: 3rem;
     }
-    
-    .legal-content {
-        padding: 1rem;
+}
+
+@media (max-width: 480px) {
+    .ai-projection {
+        width: 150px;
+        height: 250px;
     }
-    
-    .legal-content h1 {
-        font-size: 2rem;
+
+    .hologram-robot {
+        font-size: 2.5rem;
     }
 }
